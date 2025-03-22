@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
 
+        checkAllItemsFound();
     });
 
     function markItem(itemKey, percentX, percentY) {
@@ -49,5 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // Zoek item in de lijst en markeer als gevonden
         const listItem = itemList.querySelector(`[data-item="${itemKey}"]`);
         if (listItem) listItem.classList.add("found");
+    }
+
+    // Functie om te controleren of alle items gevonden zijn
+    function checkAllItemsFound() {
+        const allFound = Object.values(items).every(item => item.found); // Controleer of alle items 'found' zijn
+
+        if (allFound) {
+            alert("Gefeliciteerd! Je hebt alles gevonden! 🎉"); // Melding weergeven
+        }
     }
 });
