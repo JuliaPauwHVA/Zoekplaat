@@ -21,7 +21,7 @@ function markeerDier(dierNaam, positieX, positieY) {
     const x = (positieX / 100) * imgRect.width;
     const y = (positieY / 100) * imgRect.height;
 
-    // Maak een rode cirkel op de juiste positie.
+    // Maakt een rode cirkel op de juiste positie.
     // https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
     const rodeCirkel = document.createElement("div");
     rodeCirkel.classList.add("rodeCirkel");
@@ -29,7 +29,7 @@ function markeerDier(dierNaam, positieX, positieY) {
     rodeCirkel.style.top = `${y}px`;
     zoekAfbeelding.appendChild(rodeCirkel);
 
-    // Zoek het item in de lijst en markeert het als gevonden.
+    // Zoekt het item in de lijst en markeert het als gevonden.
     const lijstItem = dierenLijst.querySelector(`[data-item="${dierNaam}"]`);
     if (lijstItem) lijstItem.classList.add("found");
 }
@@ -45,25 +45,25 @@ function controleerAlleDierenGevonden() {
     }
 }
 
-// Voegt een klik-event toe aan de afbeelding om de zoeklocatie te bepalen
+// Voegt een klik-event toe aan de afbeelding om de zoeklocatie te bepalen.
 // https://developer.mozilla.org/en-US/docs/Web/API/Element/getBoundingClientRect
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/entries
 zoekAfbeeldingImg.addEventListener("click", (e) => {
     const rect = zoekAfbeeldingImg.getBoundingClientRect();
-    // Berekent de klikpositie als percentage van de afbeelding
+    // Berekent de klikpositie als percentage van de afbeelding.
     const clickX = ((e.clientX - rect.left) / rect.width) * 100;
     const clickY = ((e.clientY - rect.top) / rect.height) * 100;
 
-    // Loopt door alle dieren en controleert of de klik dichtbij een niet gevonden dier is
+    // Loopt door alle dieren en controleert of de klik dichtbij een niet gevonden dier is.
     Object.entries(dieren).forEach(([naam, coord]) => {
-        // Als het dier nog niet gevonden is en de klik binnen 3% van de coördinaten ligt
+        // Als het dier nog niet gevonden is en de klik binnen 3% van de coördinaten ligt.
         if (!coord.found && Math.abs(clickX - coord.x) < 3 && Math.abs(clickY - coord.y) < 3) {
-            // Markeert het dier als gevonden en updatet de status
+            // Markeert het dier als gevonden en updatet de status.
             markeerDier(naam, coord.x, coord.y);
             dieren[naam].found = true;
         }
     });
 
-    // Controleert of alle dieren zijn gevonden
+    // Controleert of alle dieren zijn gevonden.
     controleerAlleDierenGevonden();
 });
